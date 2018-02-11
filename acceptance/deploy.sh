@@ -25,16 +25,26 @@ jcurl() {
 }
 EOF
 
+cat > ~/jerakia.sh <<EOF                                      
+#!/bin/bash                                                   
+                                                              
+cd /home/ubuntu/jerakia
+export RUBYLIB=\${PWD}/lib
+export JERAKIA_CONFIG=./test/fixtures/etc/jerakia/jerakia.yaml
+export PATH=\${PATH}:\${PWD}/bin
+./bin/jerakia server
+EOF
+chmod +x ~/jerakia.sh
+
 echo "[Unit]
 Description = Jerakia
 
 [Service]
-ExecStart = /home/ubuntu/files/jerakia.sh
+ExecStart = /home/ubuntu/jerakia.sh
 User = ubuntu
 
 [Install]
 WantedBy = multi-user.target" | sudo tee -a /etc/systemd/system/jerakia.service
 
 sudo systemctl daemon-reload
-chmod +x ~/files/jerakia.sh
 sudo service jerakia start
