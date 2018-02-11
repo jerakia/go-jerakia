@@ -21,7 +21,7 @@ export JERAKIA_TOKEN="$token"
 export JERAKIA_URL="http://localhost:9992/v1"
 
 jcurl() {
-  curl -X GET -H 'X-Authentication: \$JERAKIA_TOKEN' \$1
+  curl -X GET -H "X-Authentication: \$JERAKIA_TOKEN" \$1
 }
 EOF
 
