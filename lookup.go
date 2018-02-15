@@ -38,11 +38,9 @@ type LookupOpts struct {
 func (opts LookupOpts) ToLookupQuery() (string, error) {
 	params := url.Values{}
 
-	if opts.Namespace == "" {
-		return "", fmt.Errorf("Namespace is required")
+	if opts.Namespace != "" {
+		params.Add("namespace", opts.Namespace)
 	}
-
-	params.Add("namespace", opts.Namespace)
 
 	if opts.Policy != "" {
 		params.Add("policy", opts.Policy)

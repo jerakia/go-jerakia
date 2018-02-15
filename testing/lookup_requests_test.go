@@ -66,3 +66,23 @@ func TestLookupMetadata(t *testing.T) {
 	expected := LookupMetadataResult
 	assert.Equal(t, expected, *actual)
 }
+
+func TestLookupNamespaceless(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleLookupNamespaceless(t)
+
+	lookupOpts := &jerakia.LookupOpts{
+		Metadata: map[string]string{
+			"env": "dev",
+		},
+	}
+
+	actual, err := jerakia.Lookup(fake.FakeClient(), "biscuits", lookupOpts)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	expected := LookupNamespacelessResult
+	assert.Equal(t, expected, *actual)
+}
