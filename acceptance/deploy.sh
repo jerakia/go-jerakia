@@ -14,7 +14,7 @@ git clone https://github.com/crayfishx/jerakia
 cd jerakia
 bundle install
 . test/environment.sh
-token=$(./bin/jerakia token create myapp | grep myapp)
+token=$(./bin/jerakia token create myapp --quiet)
 
 cat > ~/jrc <<EOF
 export JERAKIA_TOKEN="$token"
