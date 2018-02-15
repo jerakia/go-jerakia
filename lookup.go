@@ -54,6 +54,10 @@ func (opts LookupOpts) ToLookupQuery() (string, error) {
 		params.Add("scope", opts.Scope)
 	}
 
+	if opts.Merge != "" {
+		params.Add("merge", opts.Merge)
+	}
+
 	for k, v := range opts.ScopeOptions {
 		s := fmt.Sprintf("scope_%s", k)
 		params.Add(s, v)

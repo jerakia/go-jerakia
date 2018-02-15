@@ -106,3 +106,30 @@ func TestLookupNamespaceless(t *testing.T) {
 	expected := fixtures.LookupNamespacelessResult
 	assert.Equal(t, expected, *actual)
 }
+
+func TestLookupNamespacelessCascade(t *testing.T) {
+	if v := os.Getenv("JERAKIA_ACC"); v == "" {
+		t.Skip("JERAKIA_ACC not set")
+	}
+
+	client, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	lookupOpts := &jerakia.LookupOpts{
+		LookupType: "cascade",
+		Merge:      "array",
+		Metadata: map[string]string{
+			"env": "dev",
+		},
+	}
+
+	actual, err := jerakia.Lookup(client, "biscuits", lookupOpts)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	expected := fixtures.LookupNamespacelessCascadeResult
+	assert.Equal(t, expected, *actual)
+}

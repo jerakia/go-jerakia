@@ -144,3 +144,41 @@ func HandleLookupNamespaceless(t *testing.T) {
 		fmt.Fprintf(w, LookupNamespacelessResponse)
 	})
 }
+
+// LookupNamespacelessCascadeResponse is the expected response of a cascading
+// namespace-less lookup.
+const LookupNamespacelessCascadeResponse = `
+{
+    "found": true,
+    "payload": [
+        "gingernuts",
+        "jammiedodgers",
+        "custardcreams",
+        "richtea",
+        "digestive"
+    ],
+    "status": "ok"
+}
+`
+
+// LookupNamespacelessCascadeResult is the expected result of a cascading
+// namespace-less lookup.
+var LookupNamespacelessCascadeResult = jerakia.LookupResult{
+	Status: "ok",
+	Found:  true,
+	Payload: []interface{}{
+		"gingernuts", "jammiedodgers", "custardcreams", "richtea", "digestive",
+	},
+}
+
+// HandleLookupNamespacelessCascade tests a cascading namespace-less lookup.
+func HandleLookupNamespacelessCascade(t *testing.T) {
+	th.Mux.HandleFunc("/lookup/biscuits", func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(t, r.Method, "GET")
+		assert.Equal(t, r.Header.Get("X-Authentication"), fake.Token)
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintf(w, LookupNamespacelessCascadeResponse)
+	})
+}
