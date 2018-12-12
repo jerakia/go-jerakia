@@ -76,4 +76,4 @@ $ make testacc
 
 ### Vendor Dependencies
 
-`go-jerakia` uses `godep` for dependencies.
+`go-jerakia` uses [Go modules](https://github.com/golang/go/wiki/Modules) for dependency/vendor management.
