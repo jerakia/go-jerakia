@@ -67,6 +67,7 @@ func (client *Client) Request(method, url string, opts *RequestOpts) (*http.Resp
 
 	// Set the content-type.
 	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Content-Type", "application/json")
 
 	// Set the user-agent.
 	req.Header.Set("User-Agent", client.config.UserAgent.Join())
