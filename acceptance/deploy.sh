@@ -8,7 +8,7 @@ sudo chmod +x /usr/local/bin/gimme
 eval $(/usr/local/bin/gimme 1.9)
 /usr/local/bin/gimme 1.9 >> ~/.bashrc
 
-go get github.com/jtopjian/go-jerakia
+go get github.com/jerakia/go-jerakia
 
 git clone https://github.com/crayfishx/jerakia
 cd jerakia
@@ -25,9 +25,9 @@ jcurl() {
 }
 EOF
 
-cat > ~/jerakia.sh <<EOF                                      
-#!/bin/bash                                                   
-                                                              
+cat > ~/jerakia.sh <<EOF
+#!/bin/bash
+
 cd /home/ubuntu/jerakia
 export RUBYLIB=\${PWD}/lib
 export JERAKIA_CONFIG=./test/fixtures/etc/jerakia/jerakia.yaml

@@ -13,7 +13,7 @@ import (
   "fmt"
   "net/http"
 
-  "github.com/jtopjian/go-jerakia"
+  "github.com/jerakia/go-jerakia"
 )
 
 func main() {
@@ -46,13 +46,13 @@ Development
 ### Installation
 
 ```shell
-$ go get github.com/jtopjian/go-jerakia
+$ go get github.com/jerakia/go-jerakia
 ```
 
 ### Unit Tests
 
 ```shell
-$ cd $GOPATH/github.com/jtopjian/go-jerakia
+$ cd $GOPATH/github.com/jerakia/go-jerakia
 $ make test
 ```
 
@@ -64,7 +64,7 @@ Make sure you have the following environment variables set:
 * `JERAKIA_TOKEN`
 
 ```shell
-$ cd $GOPATH/github.com/jtopjian/go-jerakia
+$ cd $GOPATH/github.com/jerakia/go-jerakia
 $ make testacc
 ```
 

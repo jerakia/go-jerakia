@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/jtopjian/go-jerakia"
-	fixtures "github.com/jtopjian/go-jerakia/testing"
+	"github.com/jerakia/go-jerakia"
+	fixtures "github.com/jerakia/go-jerakia/testing"
 
 	"github.com/stretchr/testify/assert"
 )
