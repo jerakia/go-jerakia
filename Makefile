@@ -11,7 +11,7 @@ test:
 .ONESHELL:
 docker:
 	for i in $$(docker ps -q -f name=jerakia-server); do docker rm -f $$i; done
-	docker pull jerakia/jerakia:$(JERAKIA_VERSION)
+	docker pull $(JERAKIA_IMAGE)
 	docker run -p 9843:9843 -d --rm --name jerakia-server \
 	           -v $(JERAKIA_ETC_DIR):/etc/jerakia \
 	           -v $(JERAKIA_VAR_DIR):/var/lib/jerakia \
