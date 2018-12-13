@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/jtopjian/go-jerakia"
+	"github.com/jerakia/go-jerakia"
 )
 
 // AcceptanceTestChoices contains information required for acceptance tests.
