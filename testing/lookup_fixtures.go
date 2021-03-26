@@ -110,3 +110,59 @@ func HandleLookupMetadata(t *testing.T) {
 		fmt.Fprintf(w, LookupMetadataResponse)
 	})
 }
+
+// LookupHashMergeResponse is the expected response of a hash merge lookup.
+const LookupHashMergeResponse = `
+{
+    "found": true,
+    "payload": {
+			"key0": {
+				"element0": "common"
+			},
+      "key1": {
+				"element2": "env"
+			},
+			"key2": {
+				"element3": {
+					"subelement3": "env"
+				}
+			},
+			"key3": "env"
+    },
+    "status": "ok"
+}
+`
+
+// LookupHashMergeResult is the expected result of a hash merge lookup.
+var LookupHashMergeResult = jerakia.LookupResult{
+	Status: "ok",
+	Found:  true,
+	Payload: map[string]interface{}{
+		"key0": map[string]interface{}{
+			"element0": "common",
+		},
+		"key1": map[string]interface{}{
+			"element2": "env",
+		},
+		"key2": map[string]interface{}{
+			"element3": map[string]interface{}{
+				"subelement3": "env",
+			},
+		},
+		"key3": "env",
+	},
+}
+
+// HandleLookupHashMerge tests a hash merge lookup.
+func HandleLookupHashMerge(t *testing.T) {
+	th.Mux.HandleFunc("/lookup/hash", func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(t, "GET", r.Method)
+		assert.Equal(t, fake.Token, r.Header.Get("X-Authentication"))
+		assert.Equal(t, []string{"cascade"}, r.URL.Query()["lookup_type"])
+		assert.Equal(t, []string{"hash"}, r.URL.Query()["merge"])
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintf(w, LookupHashMergeResponse)
+	})
+}

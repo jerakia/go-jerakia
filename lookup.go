@@ -52,6 +52,10 @@ func (opts LookupOpts) ToLookupQuery() (string, error) {
 		params.Add("lookup_type", opts.LookupType)
 	}
 
+	if opts.Merge != "" {
+		params.Add("merge", opts.Merge)
+	}
+
 	if opts.Scope != "" {
 		params.Add("scope", opts.Scope)
 	}
