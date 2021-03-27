@@ -81,3 +81,26 @@ func TestLookupMetadata(t *testing.T) {
 	expected := fixtures.LookupMetadataResult
 	assert.Equal(t, expected, *actual)
 }
+
+func TestLookupKeyless(t *testing.T) {
+	if v := os.Getenv("JERAKIA_ACC"); v == "" {
+		t.Skip("JERAKIA_ACC not set")
+	}
+
+	client, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	lookupOpts := &jerakia.LookupOpts{
+		Namespace: "keyless",
+	}
+
+	actual, err := jerakia.Lookup(client, "", lookupOpts)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	expected := fixtures.LookupKeylessResult
+	assert.Equal(t, expected, *actual)
+}
