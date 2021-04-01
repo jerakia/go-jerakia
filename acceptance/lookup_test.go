@@ -81,3 +81,31 @@ func TestLookupMetadata(t *testing.T) {
 	expected := fixtures.LookupMetadataResult
 	assert.Equal(t, expected, *actual)
 }
+
+func TestLookupHashMerge(t *testing.T) {
+	if v := os.Getenv("JERAKIA_ACC"); v == "" {
+		t.Skip("JERAKIA_ACC not set")
+	}
+
+	client, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	lookupOpts := &jerakia.LookupOpts{
+		Namespace: "test",
+		Metadata: map[string]string{
+			"env": "dev",
+		},
+		LookupType: "cascade",
+		Merge: "hash",
+	}
+
+	actual, err := jerakia.Lookup(client, "hash", lookupOpts)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	expected := fixtures.LookupHashMergeResult
+	assert.Equal(t, expected, *actual)
+}

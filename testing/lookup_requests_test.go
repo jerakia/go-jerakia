@@ -66,3 +66,26 @@ func TestLookupMetadata(t *testing.T) {
 	expected := LookupMetadataResult
 	assert.Equal(t, expected, *actual)
 }
+
+func TestLookupHashMerge(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleLookupHashMerge(t)
+
+	lookupOpts := &jerakia.LookupOpts{
+		Namespace: "test",
+		Metadata: map[string]string{
+			"environment": "dev",
+		},
+		LookupType: "cascade",
+		Merge: "hash",
+	}
+
+	actual, err := jerakia.Lookup(fake.FakeClient(), "hash", lookupOpts)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	expected := LookupHashMergeResult
+	assert.Equal(t, expected, *actual)
+}
