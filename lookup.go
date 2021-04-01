@@ -91,7 +91,11 @@ type LookupResult struct {
 // Lookup performs a lookup.
 func Lookup(client *Client, key string, opts *LookupOpts) (*LookupResult, error) {
 	var r LookupResult
-	url := client.config.URL + "/" + LookupURL + "/" + key
+	url := client.config.URL + "/" + LookupURL
+
+	if key != "" {
+		url += ("/" + key)
+	}
 
 	if opts != nil {
 		query, err := opts.ToLookupQuery()

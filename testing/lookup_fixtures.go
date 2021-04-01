@@ -110,3 +110,40 @@ func HandleLookupMetadata(t *testing.T) {
 		fmt.Fprintf(w, LookupMetadataResponse)
 	})
 }
+
+// LookupKeylessResponse is the expected response of a keyless lookup.
+const LookupKeylessResponse = `
+{
+    "found": true,
+    "payload": {
+			"foo": "bar",
+			"hello": "world"
+    },
+    "status": "ok"
+}
+`
+
+// LookupKeylessResult is the expected result of a keyless lookup.
+var LookupKeylessResult = jerakia.LookupResult{
+	Status: "ok",
+	Found:  true,
+	Payload: map[string]interface{}{
+		"foo": "bar",
+		"hello": "world",
+	},
+}
+
+// HandleLookupKeyless tests a keyless lookup.
+func HandleLookupKeyless(t *testing.T) {
+	th.Mux.HandleFunc("/lookup", func(w http.ResponseWriter, r *http.Request) {
+
+		assert.Equal(t, "GET", r.Method)
+		assert.Equal(t, fake.Token, r.Header.Get("X-Authentication"))
+		assert.Equal(t, []string{"keyless"}, r.URL.Query()["namespace"])
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintf(w, LookupKeylessResponse)
+	})
+}
+
