@@ -38,11 +38,9 @@ type LookupOpts struct {
 func (opts LookupOpts) ToLookupQuery() (string, error) {
 	params := url.Values{}
 
-	if opts.Namespace == "" {
-		return "", fmt.Errorf("Namespace is required")
+	if opts.Namespace != "" {
+		params.Add("namespace", opts.Namespace)
 	}
-
-	params.Add("namespace", opts.Namespace)
 
 	if opts.Policy != "" {
 		params.Add("policy", opts.Policy)
@@ -54,6 +52,10 @@ func (opts LookupOpts) ToLookupQuery() (string, error) {
 
 	if opts.Scope != "" {
 		params.Add("scope", opts.Scope)
+	}
+
+	if opts.Merge != "" {
+		params.Add("merge", opts.Merge)
 	}
 
 	for k, v := range opts.ScopeOptions {
